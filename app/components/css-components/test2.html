@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>毛玻璃抽屉 左侧展开动画</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        background: url("https://picsum.photos/1280/720") center/cover no-repeat;
+        font-family: sans-serif;
+        overflow-x: hidden;
+      }
+
+      /* 抽屉容器 */
+      .drawer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 300px;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.3); /* 半透明背景 */
+        backdrop-filter: blur(10px); /* 毛玻璃效果 */
+        transform-origin: left center; /* 从左侧展开 */
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+        z-index: 100;
+        /* 初始隐藏状态（不显示） */
+        transform: scaleX(0);
+        opacity: 0;
+      }
+
+      /* 显示抽屉时执行动画 */
+      .drawer.show {
+        animation: caseListSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+          forwards;
+      }
+
+      /* 左侧展开动画关键帧 */
+      @keyframes caseListSlideIn {
+        0% {
+          transform: scaleX(0);
+          opacity: 0;
+        }
+        100% {
+          transform: scaleX(1);
+          opacity: 1;
+        }
+      }
+
+      /* 抽屉里的内容 */
+      .drawer-content {
+        padding: 20px;
+        color: #000;
+      }
+
+      /* 按钮样式 */
+      button {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(5px);
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 200;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 左侧抽屉 -->
+    <div class="drawer" id="drawer">
+      <div class="drawer-content">
+        <h1>菜单</h1>
+        <p>这是左侧毛玻璃抽屉的内容，可以放导航、功能按钮等。</p>
+      </div>
+    </div>
+
+    <!-- 控制按钮 -->
+    <button id="toggleBtn">打开/关闭抽屉</button>
+
+    <script>
+      const drawer = document.getElementById("drawer");
+      const btn = document.getElementById("toggleBtn");
+
+      btn.addEventListener("click", () => {
+        // 如果已经显示，隐藏它
+        if (drawer.classList.contains("show")) {
+          // 直接移除动画和回到初始状态
+          drawer.classList.remove("show");
+          drawer.style.transform = "scaleX(0)";
+          drawer.style.opacity = "0";
+        } else {
+          // 执行动画
+          drawer.classList.add("show");
+        }
+      });
+    </script>
+  </body>
+</html>

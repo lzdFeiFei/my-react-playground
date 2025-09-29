@@ -1,0 +1,99 @@
+// SCSS 变量
+$drawer-width: 300px;
+$blur-radius: 10px;
+$shadow-color: rgba(0, 0, 0, 0.3);
+$bg-overlay: rgba(255, 255, 255, 0.3);
+$animation-duration: 0.4s;
+$animation-timing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+// 背景样式
+.drawer-background {
+  margin: 0;
+  height: 100vh;
+  background: url("https://picsum.photos/1280/720") center/cover no-repeat;
+  font-family: sans-serif;
+  overflow-x: hidden;
+}
+
+// 抽屉容器
+.drawer {
+  position: fixed;
+  top: 0;
+  width: $drawer-width;
+  height: 100%;
+  box-shadow: 2px 0 10px $shadow-color;
+  z-index: 100;
+  opacity: 0;
+
+  // 抽屉1（左侧）
+  &.drawer1 {
+    left: 0;
+    background: $bg-overlay;
+    backdrop-filter: blur($blur-radius);
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+
+  // 抽屉2（右侧）
+  &.drawer2 {
+    right: 0;
+    transform: scaleX(0);
+    transform-origin: right center;
+  }
+
+  // 显示抽屉时执行动画
+  &.show {
+    animation: caseListSlideIn $animation-duration $animation-timing forwards;
+  }
+
+  // 抽屉内容
+  .drawer-content {
+    padding: 20px;
+    color: #000;
+  }
+}
+
+// 抽屉2的覆盖层
+.drawer-overlay {
+  background: $bg-overlay;
+  backdrop-filter: blur($blur-radius);
+}
+
+// 动画关键帧
+@keyframes caseListSlideIn {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+// 按钮组
+.button-group {
+  position: absolute;
+  top: 20px;
+  left: 820px;
+}
+
+// 按钮样式
+.toggle-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(5px);
+  border-radius: 4px;
+  box-shadow: 0 2px 5px $shadow-color;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}

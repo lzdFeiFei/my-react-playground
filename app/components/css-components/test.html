@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>毛玻璃抽屉效果</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        /* 背景图片仅用于演示 */
+        background: url("https://picsum.photos/1280/720") center/cover no-repeat;
+        font-family: sans-serif;
+      }
+
+      /* 抽屉整体 */
+      .drawer {
+        position: fixed;
+        top: 0;
+        right: -300px; /* 初始隐藏在屏幕右侧 */
+        width: 300px;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.3); /* 半透明背景 */
+        backdrop-filter: blur(10px); /* 毛玻璃效果 */
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease;
+        transform: translateX(0);
+        z-index: 100;
+        animation: caseListSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+          forwards;
+        transform-origin: left center;
+      }
+
+      /* 显示状态 */
+      .drawer.show {
+        transform: translateX(-400px); /* 从右滑入屏幕 */
+      }
+
+      .drawer-content {
+        padding: 20px;
+        color: #000;
+      }
+
+      /* 按钮样式 */
+      button {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(5px);
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 抽屉 -->
+    <div class="drawer" id="drawer">
+      <div class="drawer-content">
+        <h1>菜单</h1>
+        <p>这里是抽屉的内容，可以放链接、设置项等。</p>
+      </div>
+    </div>
+
+    <!-- 切换抽屉按钮 -->
+    <button id="toggleBtn">打开/关闭抽屉</button>
+
+    <script>
+      const drawer = document.getElementById("drawer");
+      const btn = document.getElementById("toggleBtn");
+
+      btn.addEventListener("click", () => {
+        drawer.classList.toggle("show");
+      });
+    </script>
+  </body>
+</html>
