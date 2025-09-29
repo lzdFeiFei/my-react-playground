@@ -1,5 +1,5 @@
 import { Outlet, Scripts, Links, Meta } from "react-router";
-import "./styles/global.css";
+import "./styles/global.scss";
 
 export default function App() {
   return (
