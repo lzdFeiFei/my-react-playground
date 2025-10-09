@@ -13,7 +13,8 @@ $active-text-color: #1976d2;
 .css-demo-layout {
   display: flex;
   height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    sans-serif;
   background-color: $bg-color;
 
   // 左侧菜单
@@ -101,6 +102,7 @@ $active-text-color: #1976d2;
       flex: 1;
       overflow: auto;
       position: relative;
+      transform: translateZ(0);
     }
   }
 }

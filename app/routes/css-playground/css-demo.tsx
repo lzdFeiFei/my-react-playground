@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import BlurAnimation from "../../components/css-components/BlurAnimation";
 import BlurAnimationDrawer from "../../components/css-components/BlurAnimationDrawer";
+import GradientBorder from "../../components/css-components/GradientBorder";
 import "../../styles/css-demo-layout.scss";
 
 // 菜单项类型定义
@@ -12,15 +13,20 @@ interface MenuItem {
 
 // 菜单配置
 const menuItems: MenuItem[] = [
-  {
-    id: "blur-animation",
-    label: "模糊动画",
-    component: BlurAnimation,
-  },
+  // {
+  //   id: "blur-animation",
+  //   label: "模糊动画",
+  //   component: BlurAnimation,
+  // },
   {
     id: "blur-animation-drawer",
     label: "毛玻璃抽屉",
     component: BlurAnimationDrawer,
+  },
+  {
+    id: "gradient-border",
+    label: "渐变边框",
+    component: GradientBorder,
   },
 ];
 
@@ -29,7 +35,7 @@ const CssDemo = () => {
 
   // 获取当前激活的组件
   const getCurrentComponent = () => {
-    const activeItem = menuItems.find(item => item.id === activeMenuItem);
+    const activeItem = menuItems.find((item) => item.id === activeMenuItem);
     if (activeItem) {
       const Component = activeItem.component;
       return <Component />;
@@ -39,7 +45,7 @@ const CssDemo = () => {
 
   // 获取当前激活菜单的标题
   const getCurrentTitle = () => {
-    const activeItem = menuItems.find(item => item.id === activeMenuItem);
+    const activeItem = menuItems.find((item) => item.id === activeMenuItem);
     return activeItem ? activeItem.label : "CSS 演示";
   };
 
@@ -47,14 +53,14 @@ const CssDemo = () => {
     <div className="css-demo-layout">
       {/* 左侧菜单 */}
       <div className="sidebar">
-        <div className="sidebar-header">
-          CSS 组件演示
-        </div>
+        <div className="sidebar-header">CSS 组件演示</div>
         <div className="menu-list">
           {menuItems.map((item) => (
             <button
               key={item.id}
-              className={`menu-item ${activeMenuItem === item.id ? "active" : ""}`}
+              className={`menu-item ${
+                activeMenuItem === item.id ? "active" : ""
+              }`}
               onClick={() => setActiveMenuItem(item.id)}
             >
               {item.label}
@@ -68,9 +74,7 @@ const CssDemo = () => {
         <div className="content-header">
           <h2>{getCurrentTitle()}</h2>
         </div>
-        <div className="content-body">
-          {getCurrentComponent()}
-        </div>
+        <div className="content-body">{getCurrentComponent()}</div>
       </div>
     </div>
   );

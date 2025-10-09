@@ -1,0 +1,89 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: stretch;
+  background: pink;
+}
+
+// 方法1
+.frosted-card {
+  width: 300px;
+  height: 200px;
+  border-radius: 20px; /* 圆角 */
+
+  /* 渐变边框实现方式 */
+  border: 5px solid transparent;
+  background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.1)
+      )
+      padding-box,
+    linear-gradient(135deg, #ff7e5f, #feb47b) border-box;
+
+  /* 半透明背景 + 模糊效果 */
+  backdrop-filter: blur(10px); /* 磨砂玻璃效果 */
+  -webkit-backdrop-filter: blur(10px); /* Safari兼容 */
+
+  /* 内容居中对齐（可选） */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 16px;
+}
+
+// 方法2
+.gradient-border {
+  position: relative;
+  border-radius: 20px;
+  padding: 5px; /* 边框宽度 */
+  background: linear-gradient(45deg, #ff7e5f, #feb47b);
+}
+
+.content {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px; /* 内层圆角要比外层小一点 */
+  padding: 20px;
+  color: white;
+}
+
+// 方法3
+.border {
+  width: 200px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.1); /* 支持半透明背景 */
+  backdrop-filter: blur(10px);
+  box-sizing: border-box;
+  border-radius: 16px;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(25, 33, 61, 0.08);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px; /* 控制边框厚度 */
+  box-sizing: border-box;
+  background: linear-gradient(180deg, blue, red); /* 自定义渐变色 */
+  background-size: 100%;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+
+  /* 实现边框镂空效果的关键：使用 mask */
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+
+  /* 兼容 WebKit 浏览器 */
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+}
