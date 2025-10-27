@@ -16,6 +16,9 @@ type Pages = {
   "/css": {
     params: {};
   };
+  "/radix": {
+    params: {};
+  };
   "/*": {
     params: {
       "*": string;
@@ -26,7 +29,7 @@ type Pages = {
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/css" | "/*";
+    page: "/" | "/css" | "/radix" | "/*";
   };
   "routes/home.tsx": {
     id: "routes/home";
@@ -35,6 +38,10 @@ type RouteFiles = {
   "./routes/css-playground/css-demo.tsx": {
     id: "routes/css-playground/css-demo";
     page: "/css";
+  };
+  "./routes/radix-playground/radix-demo.tsx": {
+    id: "routes/radix-playground/radix-demo";
+    page: "/radix";
   };
   "./routes/404.tsx": {
     id: "routes/404";

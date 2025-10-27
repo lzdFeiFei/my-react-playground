@@ -8,6 +8,9 @@ const Home = () => {
       <Link to="/css">
         <button>跳转到 CSS 演示</button>
       </Link>
+      <Link to="/radix">
+        <button>跳转到 Radix Playground</button>
+      </Link>
     </div>
   );
 };
