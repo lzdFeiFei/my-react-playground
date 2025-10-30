@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import BlurAnimation from "../../components/css-components/BlurAnimation";
 import BlurAnimationDrawer from "../../components/css-components/BlurAnimationDrawer";
 import GradientBorder from "../../components/css-components/GradientBorder";
 import "../../styles/css-demo-layout.scss";

@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Read(//c/Users/pc/.claude/**)"
+      "Read(//c/Users/pc/.claude/**)",
+      "mcp__ide__getDiagnostics",
+      "Skill(wechat-article-writer)"
     ],
     "deny": [],
     "ask": []
