@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# PPT workspace - exclude large template files
+ppt-workspace/*.pptx
