@@ -202,14 +202,23 @@ If multiple capabilities are affected, create multiple delta files under `change
 - [ ] 1.4 Write tests
 ```
 
-5. **Create design.md when needed:**
-Create `design.md` if any of the following apply; otherwise omit it:
-- Cross-cutting change (multiple services/modules) or a new architectural pattern
-- New external dependency or significant data model changes
-- Security, performance, or migration complexity
-- Ambiguity that benefits from technical decisions before coding
+5. **Create design.md ONLY when truly needed:**
 
-Minimal `design.md` skeleton:
+**STRICT Criteria** - Create design.md ONLY if:
+- Cross-cutting change affecting 3+ modules/services
+- New external dependency or database schema changes
+- Security-critical or migration-heavy changes
+- Performance optimization requiring benchmarks
+
+**Default to NO design.md for**:
+- Single-page features (<500 lines)
+- UI components or layouts
+- Simple CRUD operations
+- Features that can be built in one file
+
+**Alternative**: Use `tasks.md` with inline technical notes instead of separate design.md
+
+Minimal `design.md` skeleton (only if criteria above met):
 ```markdown
 ## Context
 [Background, constraints, stakeholders]
@@ -373,8 +382,86 @@ notifications/spec.md
 
 ## Best Practices
 
+### MVP-First Development (最小可行产品优先)
+
+**核心原则**: 先实现最简单的可工作版本,再考虑架构优化
+
+#### Phase 1: Single-File MVP (第一阶段: 单文件MVP)
+- Target: <300 lines of code in ONE file
+- **Styles**:
+  - Create ONE SCSS file (follow project conventions)
+  - Use simple selectors (avoid deep nesting >3 levels)
+  - Prefer Flexbox/Grid layout over fixed positioning
+  - Avoid complex z-index hierarchies
+- **State**: useState > URL routing (unless bookmarking required)
+- **Layout**: Document flow > absolute/fixed positioning
+- **Validation**: MVP must work and be user-approved before Phase 2
+
+#### Phase 2: Validate Core Value (第二阶段: 验证核心价值)
+- User testing and feedback
+- Performance measurement
+- Identify actual bottlenecks (not theoretical ones)
+- **Gate**: Only proceed to Phase 3 if complexity is justified
+
+#### Phase 3: Architectural Enhancement (第三阶段: 架构增强 - 可选)
+Only add if:
+- Performance data shows MVP is too slow
+- User explicitly requests advanced features (responsive, routing, etc.)
+- Codebase size exceeds 500 lines and needs splitting
+
+#### SCSS Best Practices for MVP
+✅ **DO**:
+- Single SCSS file per feature (e.g., `component-browser.scss`)
+- Flat class names with BEM or simple conventions
+- CSS variables for spacing/colors
+- Flexbox/Grid for layout
+
+❌ **DON'T**:
+- Multiple SCSS files for single feature
+- `position: fixed` + z-index stacking contexts
+- Selectors nested >3 levels
+- Complex CSS architectures for <300 line features
+
+**Example of Simple SCSS Structure**:
+```scss
+// ✅ Good: Simple and flat
+.component-browser {
+  display: flex;
+  min-height: 100vh;
+}
+
+.component-browser__sidebar {
+  width: 280px;
+  // No position: fixed!
+}
+
+.component-browser__content {
+  flex: 1;
+}
+```
+
+**Anti-Pattern Warning**:
+```scss
+// ❌ Bad: Complex z-index + fixed positioning
+.sidebar {
+  position: fixed;  // Causes event blocking
+  z-index: 10;
+}
+
+.content-area {
+  position: relative;
+  z-index: 1;  // Blocks sidebar clicks!
+}
+```
+
+**Anti-Pattern Warning (Architecture)**:
+❌ Starting with multi-layer component abstractions
+❌ Creating 4+ SCSS files before code exists
+❌ Using fixed positioning + z-index without specific need
+❌ Implementing responsive design before desktop version works
+
 ### Simplicity First
-- Default to <100 lines of new code
+- Default to <300 lines of new code (increased from 100)
 - Single-file implementations until proven insufficient
 - Avoid frameworks without clear justification
 - Choose boring, proven patterns
@@ -400,6 +487,36 @@ Only add complexity with:
 - Use kebab-case, short and descriptive: `add-two-factor-auth`
 - Prefer verb-led prefixes: `add-`, `update-`, `remove-`, `refactor-`
 - Ensure uniqueness; if taken, append `-2`, `-3`, etc.
+
+## Simplicity Checklist
+
+Before finalizing proposal, verify:
+
+### Code Simplicity
+- [ ] Can this be implemented in <300 lines?
+- [ ] Can this work in a single file initially?
+- [ ] Are we using the simplest possible state management?
+- [ ] Are we avoiding fixed positioning + complex z-index?
+
+### Architecture Simplicity
+- [ ] Do we need component abstractions, or can inline components work?
+- [ ] Do we need multiple SCSS files, or can one file suffice?
+- [ ] Do we need URL routing, or can useState handle it?
+- [ ] Do we need responsive design now, or desktop-first then enhance?
+
+### Design Document Necessity
+- [ ] Is design.md truly needed per strict criteria above?
+- [ ] Can technical decisions go in tasks.md instead?
+- [ ] Are we avoiding "just in case" architecture?
+
+**Red Flags** (indicating over-engineering):
+- 🚩 More than 5 new files for a single feature
+- 🚩 Creating directory structures before code exists
+- 🚩 Responsive design when mobile not mentioned in requirements
+- 🚩 Complex state management (Redux, Zustand) for simple UI state
+- 🚩 Component registry systems for <10 items
+- 🚩 Multiple SCSS files with <100 lines each
+- 🚩 Fixed positioning + z-index for simple layouts
 
 ## Tool Selection Guide
 

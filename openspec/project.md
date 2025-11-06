@@ -42,6 +42,54 @@
   - 优先编辑现有文件而非创建新文件
   - 对于同一文件的修改，一次性完成而非分多步骤
 
+### Implementation Strategy (实施策略)
+
+**Core Principle**: YAGNI (You Aren't Gonna Need It) + MVP-First
+
+#### MVP-First Approach
+1. **Start Simple**: 单文件实现,<300行代码
+2. **Validate**: 用户确认核心功能可用
+3. **Enhance**: 根据实际需求渐进优化
+
+#### Preferred Patterns for Small Features
+- **Styles**: **SCSS文件优先** (项目规范,必须遵循)
+  - 单个SCSS文件 > 多个SCSS文件
+  - 扁平选择器 > 深度嵌套 (避免超过3层)
+  - Flexbox/Grid布局 > fixed定位
+  - BEM命名或简单类名
+- **Layout**: 文档流布局 > 绝对/固定定位
+- **State**: useState > URL routing (除非明确需要书签/分享)
+- **Components**: 内联组件 > 独立文件 (除非复用3次以上)
+
+#### SCSS Guidelines (Critical)
+**项目要求使用SCSS,但要避免以下陷阱**:
+
+✅ **推荐做法**:
+- 使用Flexbox/Grid实现响应式布局
+- BEM命名或简单类名
+- CSS变量管理主题值
+- 相对定位为主,绝对定位为辅
+
+❌ **反模式** (本项目实际遇到的问题):
+- `position: fixed` + 多层z-index (导致点击事件被阻塞)
+- 选择器嵌套超过3层
+- 为小功能创建4+个独立SCSS文件
+- 过度使用绝对定位构建布局
+
+**教训**: 简单的Flexbox布局 + 扁平的SCSS结构 是最可靠的方案
+
+#### Complexity Gates
+只在以下情况添加复杂度:
+- 性能数据证明当前方案太慢
+- 明确的扩展需求 (如>50个组件需要注册系统)
+- 代码超过500行需要拆分
+
+#### Anti-Patterns to Avoid
+- ❌ 固定定位 + 复杂z-index层级 (易导致事件阻塞)
+- ❌ 为未来可能的需求预先设计架构
+- ❌ 在桌面版本未验证前实现响应式设计
+- ❌ 多层组件抽象 (除非每层都有明确的复用场景)
+
 ### Testing Strategy
 - 每次修改代码后必须进行彻底的静态代码检查，确保修改无误
 - 使用 ESLint 进行代码质量检查 (`pnpm lint`)
@@ -73,6 +121,9 @@
 - 不需要考虑生产环境的向后兼容性
 
 ## Important Constraints
+- **简单性优先**: **先实现最简单可工作的版本**,避免过早优化和过度设计
+- **YAGNI原则**: 不为"可能"的需求编写代码,只实现当前明确需要的功能
+- **渐进增强**: MVP验证 → 核心功能 → 可选优化,每个阶段都需要用户确认
 - **性能优先**: 建议修改时始终将代码性能作为重要考量因素
 - **安全第一**: 修改或建议代码变更时，始终考虑安全影响，避免 XSS、SQL 注入等 OWASP Top 10 漏洞
 - **无向后兼容**: 不需要考虑向后兼容或历史版本兼容，可以大胆修改代码
