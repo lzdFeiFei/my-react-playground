@@ -39,8 +39,8 @@ type RouteFiles = {
     id: "routes/css-playground/css-demo";
     page: "/css";
   };
-  "./routes/radix-playground/radix-demo.tsx": {
-    id: "routes/radix-playground/radix-demo";
+  "./routes/radix-playground/index.tsx": {
+    id: "routes/radix-playground/index";
     page: "/radix";
   };
   "./routes/404.tsx": {
