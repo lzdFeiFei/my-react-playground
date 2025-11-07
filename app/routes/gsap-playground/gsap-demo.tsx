@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import BasicTween from "../../components/gsap-components/BasicTween.tsx";
 import Timeline from "../../components/gsap-components/Timeline.tsx";
 import ScrollTrigger from "../../components/gsap-components/ScrollTrigger.tsx";
@@ -43,6 +43,7 @@ const DEMOS: DemoItem[] = [
 
 const GsapDemo = () => {
   const [selectedDemo, setSelectedDemo] = useState<DemoName>("basic-tween");
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   const currentDemo =
     DEMOS.find((item) => item.id === selectedDemo) || DEMOS[0];
@@ -50,8 +51,17 @@ const GsapDemo = () => {
   return (
     <div className="gsap-playground">
       {/* 左侧菜单栏 */}
-      <aside className="gsap-playground__sidebar">
-        <h1 className="gsap-playground__title">GSAP 学习</h1>
+      <aside className={`gsap-playground__sidebar ${sidebarCollapsed ? "gsap-playground__sidebar--collapsed" : ""}`}>
+        <div className="gsap-playground__sidebar-header">
+          {!sidebarCollapsed && <h1 className="gsap-playground__title">GSAP 学习</h1>}
+          <button
+            className="gsap-playground__collapse-btn"
+            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            title={sidebarCollapsed ? "展开菜单" : "收起菜单"}
+          >
+            {sidebarCollapsed ? "→" : "←"}
+          </button>
+        </div>
         <nav className="gsap-playground__menu">
           {DEMOS.map((item) => (
             <button
@@ -62,11 +72,22 @@ const GsapDemo = () => {
                   : ""
               }`}
               onClick={() => setSelectedDemo(item.id)}
+              title={sidebarCollapsed ? item.label : ""}
             >
-              <div className="gsap-playground__menu-label">{item.label}</div>
-              <div className="gsap-playground__menu-desc">
-                {item.description}
+              <div className="gsap-playground__menu-icon">
+                {item.id === "basic-tween" && "🎯"}
+                {item.id === "timeline" && "⏱️"}
+                {item.id === "scroll-trigger" && "📜"}
+                {item.id === "stagger" && "🔄"}
               </div>
+              {!sidebarCollapsed && (
+                <>
+                  <div className="gsap-playground__menu-label">{item.label}</div>
+                  <div className="gsap-playground__menu-desc">
+                    {item.description}
+                  </div>
+                </>
+              )}
             </button>
           ))}
         </nav>
