@@ -11,6 +11,9 @@ const Home = () => {
       <Link to="/radix">
         <button>跳转到 Radix Playground</button>
       </Link>
+      <Link to="/gsap">
+        <button>跳转到 GSAP Playground</button>
+      </Link>
     </div>
   );
 };

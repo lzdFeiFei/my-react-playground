@@ -19,6 +19,9 @@ type Pages = {
   "/radix": {
     params: {};
   };
+  "/gsap": {
+    params: {};
+  };
   "/*": {
     params: {
       "*": string;
@@ -29,7 +32,7 @@ type Pages = {
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/css" | "/radix" | "/*";
+    page: "/" | "/css" | "/radix" | "/gsap" | "/*";
   };
   "routes/home.tsx": {
     id: "routes/home";
@@ -42,6 +45,10 @@ type RouteFiles = {
   "./routes/radix-playground/index.tsx": {
     id: "routes/radix-playground/index";
     page: "/radix";
+  };
+  "./routes/gsap-playground/gsap-demo.tsx": {
+    id: "routes/gsap-playground/gsap-demo";
+    page: "/gsap";
   };
   "./routes/404.tsx": {
     id: "routes/404";

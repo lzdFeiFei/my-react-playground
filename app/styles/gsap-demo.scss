@@ -1,0 +1,363 @@
+// GSAP Playground 样式
+
+.gsap-playground {
+  display: flex;
+  height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  // 侧边栏
+  &__sidebar {
+    width: 320px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    overflow-y: auto;
+    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  &__title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0 0 2rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #667eea;
+  }
+
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__menu-item {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: #667eea;
+      transform: translateX(5px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+    }
+
+    &--active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-color: #667eea;
+      color: white;
+      box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+
+      .gsap-playground__menu-label,
+      .gsap-playground__menu-desc {
+        color: white;
+      }
+    }
+  }
+
+  &__menu-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+  }
+
+  &__menu-desc {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    line-height: 1.4;
+  }
+
+  // 内容区域
+  &__content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  &__demo-header {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+
+    h2 {
+      margin: 0 0 0.5rem 0;
+      color: #2c3e50;
+      font-size: 1.8rem;
+    }
+
+    p {
+      margin: 0;
+      color: #7f8c8d;
+      font-size: 1rem;
+    }
+  }
+
+  &__demo {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// 演示容器
+.demo-container {
+  max-width: 1200px;
+}
+
+.demo-section {
+  margin-bottom: 3rem;
+
+  h3 {
+    color: #2c3e50;
+    font-size: 1.4rem;
+    margin: 0 0 1.5rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #ecf0f1;
+  }
+}
+
+.demo-area {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 3rem;
+  margin-bottom: 1.5rem;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+// GSAP 盒子
+.gsap-box {
+  width: 100px;
+  height: 100px;
+  background: #3498db;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  will-change: transform;
+
+  &--primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  &--success {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  }
+
+  &--warning {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  }
+
+  &--danger {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  }
+}
+
+// 代码片段
+.code-snippet {
+  background: #2c3e50;
+  color: #ecf0f1;
+  padding: 1.5rem;
+  border-radius: 8px;
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 4px;
+  }
+}
+
+// 提示区域
+.demo-tips {
+  background: #fff3cd;
+  border-left: 4px solid #ffc107;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 2rem;
+
+  h4 {
+    margin: 0 0 1rem 0;
+    color: #856404;
+    font-size: 1.1rem;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 1.5rem;
+    color: #856404;
+
+    li {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+
+      strong {
+        color: #664d03;
+      }
+    }
+  }
+}
+
+// Timeline 演示特定样式
+.timeline-demo {
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.timeline-box {
+  width: 80px;
+  height: 80px;
+  font-size: 1.5rem;
+}
+
+// ScrollTrigger 演示特定样式
+.scroll-trigger-demo {
+  .scroll-hint {
+    background: white;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    color: #667eea;
+    font-weight: 600;
+    animation: bounce 2s infinite;
+  }
+
+  .scroll-section {
+    margin-bottom: 4rem;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .scroll-spacer {
+    height: 100vh;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+// Stagger 演示特定样式
+.stagger-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  max-width: 500px;
+
+  .grid-item {
+    width: 100%;
+    height: 100px;
+    font-size: 1.5rem;
+  }
+}
+
+.stagger-list {
+  max-width: 600px;
+
+  .list-item {
+    background: white;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #667eea;
+  }
+
+  .list-number {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+
+  .list-text {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    font-weight: 600;
+  }
+}
+
+.replay-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .gsap-playground {
+    flex-direction: column;
+
+    &__sidebar {
+      width: 100%;
+      height: auto;
+      max-height: 300px;
+    }
+
+    &__content {
+      padding: 1rem;
+    }
+  }
+
+  .stagger-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
