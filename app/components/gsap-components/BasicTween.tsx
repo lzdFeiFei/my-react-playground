@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import Editor from "@monaco-editor/react";
 
 interface AnimationParams {
   x: number;
@@ -242,12 +243,26 @@ const BasicTween = () => {
               <h3>💻 编写 GSAP 代码</h3>
 
               <div className="code-editor">
-                <textarea
-                  className="code-textarea"
+                <Editor
+                  height="400px"
+                  defaultLanguage="javascript"
+                  theme="vs-dark"
                   value={userCode}
-                  onChange={(e) => setUserCode(e.target.value)}
-                  spellCheck={false}
-                  placeholder="在这里编写 GSAP 代码..."
+                  onChange={(value) => setUserCode(value || '')}
+                  options={{
+                    minimap: { enabled: false },
+                    fontSize: 14,
+                    lineNumbers: 'on',
+                    roundedSelection: false,
+                    scrollBeyondLastLine: false,
+                    automaticLayout: true,
+                    tabSize: 2,
+                    wordWrap: 'on',
+                    quickSuggestions: true,
+                    suggestOnTriggerCharacters: true,
+                    acceptSuggestionOnEnter: 'on',
+                    padding: { top: 16, bottom: 16 },
+                  }}
                 />
               </div>
 
