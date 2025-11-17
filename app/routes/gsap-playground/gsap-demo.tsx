@@ -3,9 +3,10 @@ import BasicTween from "../../components/gsap-components/BasicTween.tsx";
 import Timeline from "../../components/gsap-components/Timeline.tsx";
 import ScrollTrigger from "../../components/gsap-components/ScrollTrigger.tsx";
 import Stagger from "../../components/gsap-components/Stagger.tsx";
+import Easing from "../../components/gsap-components/Easing.tsx";
 import "../../styles/gsap-demo.scss";
 
-type DemoName = "basic-tween" | "timeline" | "scroll-trigger" | "stagger";
+type DemoName = "basic-tween" | "timeline" | "scroll-trigger" | "stagger" | "easing";
 
 interface DemoItem {
   id: DemoName;
@@ -20,6 +21,12 @@ const DEMOS: DemoItem[] = [
     label: "基础补间动画",
     description: "学习 gsap.to(), gsap.from(), gsap.fromTo() 的基础用法",
     component: <BasicTween />,
+  },
+  {
+    id: "easing",
+    label: "缓动函数",
+    description: "探索各种 Easing 函数的视觉效果和对比",
+    component: <Easing />,
   },
   {
     id: "timeline",
@@ -76,6 +83,7 @@ const GsapDemo = () => {
             >
               <div className="gsap-playground__menu-icon">
                 {item.id === "basic-tween" && "🎯"}
+                {item.id === "easing" && "📈"}
                 {item.id === "timeline" && "⏱️"}
                 {item.id === "scroll-trigger" && "📜"}
                 {item.id === "stagger" && "🔄"}

@@ -112,19 +112,14 @@ const BasicTween = () => {
     try {
       // 使用 new Function 执行用户代码
       // 只暴露 gsap 和 element，限制作用域
-      const executeCode = new Function(
-        'gsap',
-        'element',
-        'console',
-        userCode
-      );
+      const executeCode = new Function("gsap", "element", "console", userCode);
 
       // 执行代码
       executeCode(gsap, boxRef.current, console);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : String(err);
       setError(`代码执行错误: ${errorMessage}`);
-      console.error('GSAP 代码执行错误:', err);
+      console.error("GSAP 代码执行错误:", err);
     }
   };
 
@@ -176,7 +171,9 @@ const BasicTween = () => {
                     min="-500"
                     max="500"
                     value={params.x}
-                    onChange={(e) => setParams({ ...params, x: Number(e.target.value) })}
+                    onChange={(e) =>
+                      setParams({ ...params, x: Number(e.target.value) })
+                    }
                   />
                   <span className="control-value">{params.x}</span>
                 </label>
@@ -191,7 +188,9 @@ const BasicTween = () => {
                     max="720"
                     step="45"
                     value={params.rotation}
-                    onChange={(e) => setParams({ ...params, rotation: Number(e.target.value) })}
+                    onChange={(e) =>
+                      setParams({ ...params, rotation: Number(e.target.value) })
+                    }
                   />
                   <span className="control-value">{params.rotation}</span>
                 </label>
@@ -206,7 +205,9 @@ const BasicTween = () => {
                     max="5"
                     step="0.1"
                     value={params.duration}
-                    onChange={(e) => setParams({ ...params, duration: Number(e.target.value) })}
+                    onChange={(e) =>
+                      setParams({ ...params, duration: Number(e.target.value) })
+                    }
                   />
                   <span className="control-value">{params.duration}s</span>
                 </label>
@@ -217,7 +218,9 @@ const BasicTween = () => {
                   <span className="control-label">缓动函数</span>
                   <select
                     value={params.ease}
-                    onChange={(e) => setParams({ ...params, ease: e.target.value })}
+                    onChange={(e) =>
+                      setParams({ ...params, ease: e.target.value })
+                    }
                     className="ease-select"
                   >
                     {EASE_OPTIONS.map((ease) => (
@@ -248,19 +251,19 @@ const BasicTween = () => {
                   defaultLanguage="javascript"
                   theme="vs-dark"
                   value={userCode}
-                  onChange={(value) => setUserCode(value || '')}
+                  onChange={(value) => setUserCode(value || "")}
                   options={{
                     minimap: { enabled: false },
                     fontSize: 14,
-                    lineNumbers: 'on',
+                    lineNumbers: "on",
                     roundedSelection: false,
                     scrollBeyondLastLine: false,
                     automaticLayout: true,
                     tabSize: 2,
-                    wordWrap: 'on',
+                    wordWrap: "on",
                     quickSuggestions: true,
                     suggestOnTriggerCharacters: true,
-                    acceptSuggestionOnEnter: 'on',
+                    acceptSuggestionOnEnter: "on",
                     padding: { top: 16, bottom: 16 },
                   }}
                 />
@@ -270,18 +273,20 @@ const BasicTween = () => {
                 ▶️ 运行代码
               </button>
 
-              {error && (
-                <div className="error-message">
-                  ⚠️ {error}
-                </div>
-              )}
+              {error && <div className="error-message">⚠️ {error}</div>}
 
               <div className="code-tips">
                 <h4>💡 可用对象：</h4>
                 <ul>
-                  <li><code>gsap</code> - GSAP 动画库</li>
-                  <li><code>element</code> - 动画目标元素</li>
-                  <li><code>console</code> - 用于调试输出</li>
+                  <li>
+                    <code>gsap</code> - GSAP 动画库
+                  </li>
+                  <li>
+                    <code>element</code> - 动画目标元素
+                  </li>
+                  <li>
+                    <code>console</code> - 用于调试输出
+                  </li>
                 </ul>
               </div>
             </>
@@ -309,7 +314,9 @@ const BasicTween = () => {
             ) : (
               <ul>
                 <li>直接编写 GSAP 动画代码</li>
-                <li>使用 <code>element</code> 作为动画目标</li>
+                <li>
+                  使用 <code>element</code> 作为动画目标
+                </li>
                 <li>点击"运行代码"执行动画</li>
                 <li>代码错误会在下方显示提示</li>
               </ul>
